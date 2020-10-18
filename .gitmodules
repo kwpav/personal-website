@@ -1,0 +1,7 @@
+[submodule "themes/archie"]
+	path = themes/archie
+	url = https://github.com/athul/archie.git
+[submodule "public"]
+	path = public
+	url = https://github.com/kwpav/kwpav.github.io.git
+	branch = master

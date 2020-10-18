@@ -1,0 +1,13 @@
+baseURL = "https://kwpav.github.io/"
+languageCode = "en-us"
+title = "(kpavs notes)"
+theme ="archie"
+copyright = "© Kevin Pavao"
+# Code Highlight
+pygmentsstyle = "monokai"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+[params]
+	mode="dark" # color-mode → light,dark or auto
+	featherIconsCDN=true

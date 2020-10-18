@@ -1,0 +1,2 @@
+* Personal Website
+This is the home of my personal website, [[https://kwpav.github.io][kwpav.github.io]]. It is (currently) built using Hugo and [[https://ox-hugo.scripter.co/][ox-hugo]].
