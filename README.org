@@ -1,2 +1,14 @@
 * Personal Website
 This is the home of my personal website, [[https://kwpav.github.io][kwpav.github.io]]. It is (currently) built using Hugo and [[https://ox-hugo.scripter.co/][ox-hugo]].
+
+After exporting posts here using =ox-hugo=, I run the server to test:
+#+begin_src sh
+  hugo server -D
+#+end_src
+
+Then deploy it to [[https://kwpav.github.io][kwpav.github.io]] using:
+#+begin_src sh
+  ./deploy.sh
+#+end_src
+
+This builds the site to the =public/= folder, commits the change, and pushes it to =kwpav/kwpav.github.io=.
