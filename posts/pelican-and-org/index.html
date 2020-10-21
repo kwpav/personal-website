@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Pelican and Org Mode - (kpavs notes)</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:description" content="" />
+	<meta name="twitter:description" content="" />
+	<meta name="description" content="" />
+	<meta name="description" content="" />
+
+	<meta property="og:title" content="Pelican and Org Mode | (kpavs notes)" />
+	<meta name="twitter:title" content="Pelican and Org Mode | (kpavs notes)" />
+
+	<meta property="og:image" content=""/>
+	<meta itemprop="name" content="Pelican and Org Mode | (kpavs notes)" />
+	<meta name="application-name" content="Pelican and Org Mode | (kpavs notes)" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:title" content="Pelican and Org Mode" />
+<meta property="og:description" content="One of the first things you need to do after deciding to start a blog, is setting one up. So I figured it would be appopropriate that the first post of my blog is about how I set this up.
+My requirements are fairly simple:
+ be able to write content using Emacs&#39; org-mode create a static site preferably written in a language I know  This led me down a path of looking at and trying a few different static site generators." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kwpav.github.io/posts/pelican-and-org/" />
+<meta property="article:published_time" content="2018-09-23T22:24:00-05:00" />
+<meta property="article:modified_time" content="2018-09-23T22:24:00-05:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pelican and Org Mode"/>
+<meta name="twitter:description" content="One of the first things you need to do after deciding to start a blog, is setting one up. So I figured it would be appopropriate that the first post of my blog is about how I set this up.
+My requirements are fairly simple:
+ be able to write content using Emacs&#39; org-mode create a static site preferably written in a language I know  This led me down a path of looking at and trying a few different static site generators."/>
+
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://kwpav.github.io/css/main.css" /><link rel="stylesheet" type="text/css" href="https://kwpav.github.io/css/dark.css"  />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://kwpav.github.io/">(kpavs notes)</a>
+	</div>
+	<nav>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Pelican and Org Mode</h1>
+			<div class="meta">Posted on Sep 23, 2018</div>
+		</div>
+		
+
+		<section class="body">
+			<p>One of the first things you need to do after deciding to start a blog, is setting one up. So I figured it would be appopropriate that the first post of my blog is about how I set this up.</p>
+<p>My requirements are fairly simple:</p>
+<ul>
+<li>be able to write content using Emacs' <code>org-mode</code></li>
+<li>create a static site</li>
+<li>preferably written in a language I know</li>
+</ul>
+<p>This led me down a path of looking at and trying a few different static site generators.</p>
+<p>Each static site generator essentially works the same. There is a CLI which allows you to:</p>
+<ul>
+<li>Scaffold out the site.</li>
+<li>Create content in a folder in some sort of text format, e.g. markdown, rest, org, etc.</li>
+<li>Generate HTML from the content</li>
+<li>Run a local server to preview the website</li>
+</ul>
+<p>After trying out a few different ones, I decided to use <a href="http://docs.getpelican.com/en/stable/">Pelican</a>. It seems to be the most popular and actively maintained one written in Python. It&rsquo;s even used by <a href="https://kernel.org">kernel.org</a>!</p>
+<h2 id="initial-setup">Initial setup</h2>
+<p>First, install <code>pelican</code> (I use <code>pipenv</code> personally).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pipenv install pelican
+pipenv shell
+</code></pre></div><p>Create the folder where you want the website and initialize the site:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pelican<span style="color:#f92672">-</span>quickstart
+</code></pre></div><p>This scaffolds out the files and directories needed.</p>
+<p>Create a new post in the <code>content</code> folder.</p>
+<p>Generate the output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pelican content
+</code></pre></div><p>This creates generates the output into the <code>output</code> folder.</p>
+<p>Preview the content:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd output
+python -m pelican.server
+</code></pre></div><p>If you select &ldquo;yes&rdquo; during <code>pelican-quickstart</code>, a <code>Makefile</code> is created. This allows you to use <code>make</code> to automate some of the pelican tasks such as generating the output, publishing, running the server, etc.</p>
+<p>See how to use it from the <a href="http://docs.getpelican.com/en/stable/publish.html?highlight=makefile#make">official docs</a>.</p>
+<h2 id="using-org-mode">Using org-mode</h2>
+<p>In order to use <code>org-mode</code>, you need to install a plugin.</p>
+<p>To install a plugin, clone the <a href="https://github.com/getpelican/pelican-plugins">pelican-plugins</a> repo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone --recursive https://github.com/getpelican/pelican-plugins
+</code></pre></div><p>Add the path and the plugin to to your <code>pelicanconf.py</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PLUGIN_PATHS <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;path/to/pelican-plugins&#39;</span>]
+PLUGINS <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;org_reader&#39;</span>]
+</code></pre></div><p>There are three different plugins to choose from:</p>
+<ol>
+<li><code>org_reader</code></li>
+<li><code>org_python_reader</code></li>
+<li><code>org_pandoc_reader</code></li>
+</ol>
+<p>Each plugin uses a different mechanism to convert the <code>.org</code> files to HTML. <code>org_reader</code> uses Emacs, <code>org_python_reader</code> uses the <a href="https://github.com/paetzke/orgco">orgco</a> Python library, and <code>org_pandoc_reader</code> uses (you guessed it&hellip;) <a href="https://pandoc.org">Pandoc</a>.</p>
+<p>It seems that <code>org_python_reader</code> is an &lsquo;update&rsquo; for <code>org_reader</code>. <code>org_pandoc_reader</code> on the other hand looks to be based off of another plugin, <code>pandoc_reader</code>.</p>
+<p>I tried out <code>org_reader</code> and <code>org_python_reader</code> but found some bugs. They were pretty easy to fix, so I decided to make my very first PR to a project that wasn&rsquo;t mine or a friends!</p>
+<p><a href="https://github.com/getpelican/pelican-plugins/pull/1064">https://github.com/getpelican/pelican-plugins/pull/1064</a></p>
+<h3 id="org-reader-setup">org_reader setup</h3>
+<p>Add the following to <code>pelicanconf.py</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PLUGINS <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;org_reader&#39;</span>]
+ORG_READER_EMACS_LOCATION <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/usr/bin/emacs&#39;</span>
+</code></pre></div><p>In order to define the metadata for Pelican, put the following in the <code>org</code> file&rsquo;s header:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org"><span style="color:#75715e">#+TITLE</span><span style="color:#75715e">: The Title Of This BlogPost</span>
+<span style="color:#75715e">#+DATE</span><span style="color:#75715e">: 2001-01-01</span>
+<span style="color:#75715e">#+CATEGORY</span><span style="color:#75715e">: blog-category</span>
+<span style="color:#75715e">#+AUTHOR</span><span style="color:#75715e">: My Name</span>
+<span style="color:#75715e">#+PROPERTY</span><span style="color:#75715e">: LANGUAGE en</span>
+<span style="color:#75715e">#+PROPERTY</span><span style="color:#75715e">: SUMMARY hello, this is the description</span>
+<span style="color:#75715e">#+PROPERTY</span><span style="color:#75715e">: SLUG test_slug</span>
+<span style="color:#75715e">#+PROPERTY</span><span style="color:#75715e">: MODIFIED [2015-12-29 Di]</span>
+<span style="color:#75715e">#+PROPERTY</span><span style="color:#75715e">: TAGS my, first, tags</span>
+<span style="color:#75715e">#+PROPERTY</span><span style="color:#75715e">: SAVE_AS alternative_filename.html</span>
+</code></pre></div><h3 id="org-python-reader-setup">org_python_reader setup</h3>
+<p>Add the following to <code>pelicanconf.py</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PLUGINS <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;org_python_reader&#39;</span>]
+ORGMODE <span style="color:#f92672">=</span> {
+        <span style="color:#e6db74">&#39;code_highlight&#39;</span>: True,
+}
+</code></pre></div><p>It will not work unless you add <code>ORGMODE</code>. The only option currently is <code>code_highlight</code> which can be set to <code>True</code> or <code>False</code>. This tells the plugin whether to add syntax highlighting to <code>SRC</code> blocks.</p>
+<p>This uses the same <code>org</code> headers as <code>org_reader</code>.</p>
+<p>One thing to note is that this plugin will always print out line numbers in <code>SRC</code> blocks due to its dependency on <a href="https://github.com/paetzke/orgco">orgco</a>.</p>
+<h3 id="org-pandoc-reader-setup">org_pandoc_reader setup</h3>
+<p>In order to use <a href="https://github.com/jo-tham/org%5Fpandoc%5Freader/tree/bf06b72c1bfe1831f3e4c872f6c833af0bec19bf">org_pandoc_reader</a>, you need to clone it as the <code>pelican-plugins</code> repo only links to it, it doesn&rsquo;t include it directly:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/jo-tham/org_pandoc_reader.git
+</code></pre></div><p>Add the following to <code>pelicanconf.py</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">PLUGINS <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;org_pandoc_reader&#39;</span>]
+ORG_PANDOC_ARGS <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;--standalone&#39;</span>,]
+</code></pre></div><p>Without <code>--standalone</code>, the SRC blocks don&rsquo;t have syntax highlighting. Source code blocks are also underlined for me in some themes for some reason. I might take a look at why that is happening later.</p>
+<p><code>org_pandoc_reader</code> also does not use <code>PROPERTY</code> to generate metadata, you just use the name of the setting directly, e.g.:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org"><span style="color:#75715e">#+TITLE</span><span style="color:#75715e">: The Title Of This BlogPost</span>
+<span style="color:#75715e">#+DATE</span><span style="color:#75715e">: 2001-01-01</span>
+<span style="color:#75715e">#+CATEGORY</span><span style="color:#75715e">: blog-category</span>
+<span style="color:#75715e">#+AUTHOR</span><span style="color:#75715e">: My Name</span>
+<span style="color:#75715e">#+LANGUAGE</span><span style="color:#75715e">: en</span>
+<span style="color:#75715e">#+SUMMARY</span><span style="color:#75715e">: hello, this is the description</span>
+<span style="color:#75715e">#+SLUG</span><span style="color:#75715e">: test_slug</span>
+<span style="color:#75715e">#+MODIFIED</span><span style="color:#75715e">: [2015-12-29 Di]</span>
+<span style="color:#75715e">#+TAGS</span><span style="color:#75715e">: my, first, tags</span>
+</code></pre></div><h2 id="conclusion-and-other-thoughts">Conclusion and other thoughts</h2>
+<p>Using Pelican and org mode is pretty nice once its set up. Although I did run into some troubles initially, and I was able to fairly easily fix the issues I was having. I even submitted my first issues and PR&rsquo;s to an open source project that wasn&rsquo;t my own or a friends!</p>
+<ul>
+<li><a href="https://github.com/getpelican/pelican-plugins/pull/1066">Fix the processing of org files with SRC blocks.</a></li>
+<li><a href="https://github.com/getpelican/pelican-plugins/pull/1064">Fix loading of org_reader plugins.</a></li>
+</ul>
+<p>In my testing of different static site generators, I tried <a href="https://gohugo.io/">Hugo</a>, written in go, along with the <a href="https://ox-hugo.scripter.co/">ox-hugo</a> package for Emacs. I really liked it as <code>ox-hugo</code> gives you the ability to have several posts/pages/etc in a single org file. I would ultimately like to set something like that up for Pelican, but thats a task for a later day.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr>⚡️
+	2020  © Kevin Pavao |  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+</div>
+    </body>
+</html>
